@@ -1,0 +1,3 @@
+module ActiverecordEnum
+  # Your code goes here...
+end
