@@ -1,3 +1,6 @@
+require 'test/unit'
+require 'active_record'
+
 def load_schema
   # silence verbose schema loading
   original_stdout = $stdout
