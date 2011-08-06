@@ -1,5 +1,6 @@
 ActiveRecord::Schema.define do
   create_table :aircraft, :force => true do |t|
-    t.string :name
+    t.integer "id"
+    t.column "color", "enum('blue','red','yellow')", :default => nil
   end
 end
