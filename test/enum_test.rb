@@ -7,7 +7,17 @@ class EnumTest < ActiveRecord::TestCase
 
   def test_dumps_native_format
     output = standard_dump
-    assert_match %r{t\.enum\s+"color",\s+:limit => \["blue", "red", "yellow"\]$}, output
+    assert_match %r{t\.enum\s+"color",\s+:limit => \["blue", "red", "yellow"\]}, output
+  end
+
+  def test_dumps_default_option
+    output = standard_dump
+    assert_match %r{t\.enum\s+"color",.+:default => "red"}, output
+  end
+
+  def test_dumps_null_option
+    output = standard_dump
+    assert_match %r{t\.enum\s+"color",.+:null => false$}, output
   end
 
   private
