@@ -6,9 +6,8 @@ class EnumTest < ActiveRecord::TestCase
   end
 
   def test_dumps_native_format
-puts ActiveRecord::Base.connection.native_database_types[:enum].inspect
     output = standard_dump
-    assert_match %r{t.enum\s+"color"$}, output
+    assert_match %r{t\.enum\s+"color",\s+:limit => \["blue", "red", "yellow"\]$}, output
   end
 
   private

@@ -35,8 +35,8 @@ module ActiveRecord
         end
       end
       def extract_limit_with_enum field_type
-        if field_type =~ /enum/i
-          nil
+        if field_type =~ /enum\(([^)]+)\)/i
+          $1.scan( /'([^']*)'/ ).flatten
         else
           extract_limit field_type
         end
