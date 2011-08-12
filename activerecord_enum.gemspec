@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
 
   s.rubyforge_project = "activerecord_enum"
 
-  s.add_dependency "activerecord"
+  s.add_dependency "activerecord", "~> 3.0.9"
   s.add_development_dependency "rake"
   s.add_development_dependency "mysql2", "~> 0.2.0"
 
