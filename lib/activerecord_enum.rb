@@ -44,3 +44,15 @@ module ActiveRecord
     end
   end
 end
+module ActiveRecord
+  module ConnectionAdapters
+    class TableDefinition
+      def enum *args
+        options = args.extract_options!
+        allowed = options.delete :limit
+        column_names = args
+        column_names.each { |name| column(name, "enum(#{allowed.map{|n| "'#{n}'"}.join(",")})", options) }
+      end
+    end
+  end
+end

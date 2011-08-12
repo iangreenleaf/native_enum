@@ -20,6 +20,11 @@ class EnumTest < ActiveRecord::TestCase
     assert_match %r{t\.enum\s+"color",.+:null => false$}, output
   end
 
+  def test_loads_native_format
+    load_schema "schema_new"
+    desc = ActiveRecord::Base.connection.select_one "SHOW FIELDS FROM balloons WHERE Field='color'"
+    assert_equal "enum('red','gold')", desc[ "Type" ]
+  end
   private
   def standard_dump
     stream = StringIO.new
