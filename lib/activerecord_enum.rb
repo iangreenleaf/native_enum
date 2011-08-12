@@ -44,4 +44,3 @@ module ActiveRecord
     end
   end
 end
-#require 'activerecord_enum/railtie' if defined?(Rails)
