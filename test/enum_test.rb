@@ -25,6 +25,13 @@ class EnumTest < ActiveRecord::TestCase
     desc = ActiveRecord::Base.connection.select_one "SHOW FIELDS FROM balloons WHERE Field='color'"
     assert_equal "enum('red','gold')", desc[ "Type" ]
   end
+
+  def test_loads_native_column_format
+    load_schema "schema_new"
+    desc = ActiveRecord::Base.connection.select_one "SHOW FIELDS FROM balloons WHERE Field='size'"
+    assert_equal "enum('small','medium','large')", desc[ "Type" ]
+  end
+
   private
   def standard_dump
     stream = StringIO.new

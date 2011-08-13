@@ -1,9 +1,10 @@
 require 'active_record'
+require 'active_record/connection_adapters/mysql2_adapter'
+require 'active_record/connection_adapters/abstract/schema_definitions.rb'
 
 module ActiverecordEnum
 end
 
-require 'active_record/connection_adapters/mysql2_adapter'
 module ActiveRecord
   module ConnectionAdapters
     class Mysql2Adapter < AbstractAdapter
@@ -12,11 +13,20 @@ module ActiveRecord
       end
       alias_method :native_database_types_without_enum, :native_database_types
       alias_method :native_database_types, :native_database_types_with_enum
+
+      def type_to_sql_with_enum type, limit=nil, *args
+        if type.to_s == "enum"
+          "enum(#{limit.to_a.map{|n| "'#{n}'"}.join(",")})"
+        else
+          type_to_sql_without_enum type, limit, *args
+        end
+      end
+      alias_method :type_to_sql_without_enum, :type_to_sql
+      alias_method :type_to_sql, :type_to_sql_with_enum
     end
   end
 end
 
-require 'active_record/connection_adapters/abstract/schema_definitions.rb'
 module ActiveRecord
   module ConnectionAdapters
     class Column
@@ -49,9 +59,8 @@ module ActiveRecord
     class TableDefinition
       def enum *args
         options = args.extract_options!
-        allowed = options.delete :limit
         column_names = args
-        column_names.each { |name| column(name, "enum(#{allowed.map{|n| "'#{n}'"}.join(",")})", options) }
+        column_names.each { |name| column(name, :enum, options) }
       end
     end
   end
