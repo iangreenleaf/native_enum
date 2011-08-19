@@ -1,13 +1,13 @@
 require 'rspec'
 require 'activerecord_enum'
 
-def load_schema filename="schema"
+def load_schema filename
   # silence verbose schema loading
   original_stdout = $stdout
   $stdout = StringIO.new
 
   root = File.expand_path(File.dirname(__FILE__))
-  load root + "/#{filename}.rb"
+  load root + "/schema/#{filename}.rb"
 
 ensure
   $stdout = original_stdout

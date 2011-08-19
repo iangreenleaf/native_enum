@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "activerecord_enum" do
 
   describe "schema dump" do
-    before { load_schema }
+    before { load_schema "enum_old" }
     subject { standard_dump }
 
     it "dumps native format" do
@@ -20,7 +20,7 @@ describe "activerecord_enum" do
   end
 
   describe "schema loading" do
-    before { load_schema "schema_new" }
+    before { load_schema "enum_new" }
     subject { ActiveRecord::Base.connection.select_one "SHOW FIELDS FROM balloons WHERE Field='color'" }
 
     it "loads native format" do
