@@ -41,6 +41,11 @@ describe "activerecord_enum" do
     end
   end
 
+  describe "validation" do
+    it "validates assigned value is member of the list"
+    it "allows nil when null enabled"
+  end
+
   private
   def standard_dump
     stream = StringIO.new
