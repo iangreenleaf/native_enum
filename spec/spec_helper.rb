@@ -1,4 +1,4 @@
-require 'test/unit'
+require 'rspec'
 require 'activerecord_enum'
 
 def load_schema filename="schema"
@@ -12,8 +12,6 @@ def load_schema filename="schema"
 ensure
   $stdout = original_stdout
 end
-
-#load_schema
 
 ActiveRecord::Base.configurations = {
   "enum_test" => {

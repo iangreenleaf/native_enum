@@ -1,47 +1,48 @@
-require 'test_helper'
+require 'spec_helper'
 
-class EnumTest < ActiveRecord::TestCase
-  def setup
+describe "activerecord_enum" do
+
+  before do
     load_schema
   end
 
-  def test_dumps_native_format
+  it "dumps native format" do
     output = standard_dump
-    assert_match %r{t\.enum\s+"color",\s+:limit => \["blue", "red", "yellow"\]}, output
+    output.should match %r{t\.enum\s+"color",\s+:limit => \["blue", "red", "yellow"\]}
   end
 
-  def test_dumps_default_option
+  it "dumps default option" do
     output = standard_dump
-    assert_match %r{t\.enum\s+"color",.+:default => "red"}, output
+    output.should match %r{t\.enum\s+"color",.+:default => "red"}
   end
 
-  def test_dumps_null_option
+  it "dumps null option" do
     output = standard_dump
-    assert_match %r{t\.enum\s+"color",.+:null => false$}, output
+    output.should match %r{t\.enum\s+"color",.+:null => false$}
   end
 
-  def test_loads_native_format
+  it "loads native format" do
     load_schema "schema_new"
     desc = ActiveRecord::Base.connection.select_one "SHOW FIELDS FROM balloons WHERE Field='color'"
-    assert_equal "enum('red','gold')", desc[ "Type" ]
+    desc[ "Type" ].should == "enum('red','gold')"
   end
 
-  def test_loads_native_column_format
+  it "loads native column format" do
     load_schema "schema_new"
     desc = ActiveRecord::Base.connection.select_one "SHOW FIELDS FROM balloons WHERE Field='size'"
-    assert_equal "enum('small','medium','large')", desc[ "Type" ]
+    desc[ "Type" ].should == "enum('small','medium','large')"
   end
 
-  def test_loads_default_option
+  it "loads default option" do
     load_schema "schema_new"
     desc = ActiveRecord::Base.connection.select_one "SHOW FIELDS FROM balloons WHERE Field='color'"
-    assert_equal "gold", desc[ "Default" ]
+    desc[ "Default" ].should == "gold"
   end
 
-  def test_loads_null_option
+  it "loads null option" do
     load_schema "schema_new"
     desc = ActiveRecord::Base.connection.select_one "SHOW FIELDS FROM balloons WHERE Field='color'"
-    assert_equal "NO", desc[ "Null" ]
+    desc[ "Null" ].should == "NO"
   end
 
   private
