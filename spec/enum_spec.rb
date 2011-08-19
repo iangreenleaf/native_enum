@@ -2,47 +2,43 @@ require 'spec_helper'
 
 describe "activerecord_enum" do
 
-  before do
-    load_schema
+  describe "schema dump" do
+    before { load_schema }
+    subject { standard_dump }
+
+    it "dumps native format" do
+      subject.should match %r{t\.enum\s+"color",\s+:limit => \["blue", "red", "yellow"\]}
+    end
+
+    it "dumps default option" do
+      subject.should match %r{t\.enum\s+"color",.+:default => "red"}
+    end
+
+    it "dumps null option" do
+      subject.should match %r{t\.enum\s+"color",.+:null => false$}
+    end
   end
 
-  it "dumps native format" do
-    output = standard_dump
-    output.should match %r{t\.enum\s+"color",\s+:limit => \["blue", "red", "yellow"\]}
-  end
+  describe "schema loading" do
+    before { load_schema "schema_new" }
+    subject { ActiveRecord::Base.connection.select_one "SHOW FIELDS FROM balloons WHERE Field='color'" }
 
-  it "dumps default option" do
-    output = standard_dump
-    output.should match %r{t\.enum\s+"color",.+:default => "red"}
-  end
+    it "loads native format" do
+      subject[ "Type" ].should == "enum('red','gold')"
+    end
 
-  it "dumps null option" do
-    output = standard_dump
-    output.should match %r{t\.enum\s+"color",.+:null => false$}
-  end
+    it "loads default option" do
+      subject[ "Default" ].should == "gold"
+    end
 
-  it "loads native format" do
-    load_schema "schema_new"
-    desc = ActiveRecord::Base.connection.select_one "SHOW FIELDS FROM balloons WHERE Field='color'"
-    desc[ "Type" ].should == "enum('red','gold')"
-  end
+    it "loads null option" do
+      subject[ "Null" ].should == "NO"
+    end
 
-  it "loads native column format" do
-    load_schema "schema_new"
-    desc = ActiveRecord::Base.connection.select_one "SHOW FIELDS FROM balloons WHERE Field='size'"
-    desc[ "Type" ].should == "enum('small','medium','large')"
-  end
-
-  it "loads default option" do
-    load_schema "schema_new"
-    desc = ActiveRecord::Base.connection.select_one "SHOW FIELDS FROM balloons WHERE Field='color'"
-    desc[ "Default" ].should == "gold"
-  end
-
-  it "loads null option" do
-    load_schema "schema_new"
-    desc = ActiveRecord::Base.connection.select_one "SHOW FIELDS FROM balloons WHERE Field='color'"
-    desc[ "Null" ].should == "NO"
+    it "loads native column format" do
+      subject = ActiveRecord::Base.connection.select_one "SHOW FIELDS FROM balloons WHERE Field='size'"
+      subject[ "Type" ].should == "enum('small','medium','large')"
+    end
   end
 
   private
