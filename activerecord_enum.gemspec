@@ -16,6 +16,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "activerecord", "~> 3.0.9"
   s.add_development_dependency "rake"
+  s.add_development_dependency "bundler"
   s.add_development_dependency "mysql2", "~> 0.2.0"
 
   s.files         = `git ls-files`.split("\n")
