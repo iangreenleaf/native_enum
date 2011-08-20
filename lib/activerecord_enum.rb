@@ -15,10 +15,8 @@ module ActiveRecord
       alias_method :native_database_types, :native_database_types_with_enum
 
       def type_to_sql_with_enum type, limit=nil, *args
-        if type.to_s == "enum"
-          "enum(#{quoted_comma_list limit})"
-        elsif type.to_s == "set"
-          "set(#{quoted_comma_list limit})"
+        if type.to_s == "enum" || type.to_s == "set"
+          "#{type}(#{quoted_comma_list limit})"
         else
           type_to_sql_without_enum type, limit, *args
         end
@@ -47,10 +45,8 @@ module ActiveRecord
       alias_method :initialize, :initialize_with_enum
 
       def simplified_type_with_enum field_type
-        if field_type =~ /enum/i
-          :enum
-        elsif field_type =~ /set/i
-          :set
+        if field_type =~ /enum|set/i
+          $&.to_sym
         else
           simplified_type field_type
         end

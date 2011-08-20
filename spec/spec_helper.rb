@@ -13,6 +13,13 @@ ensure
   $stdout = original_stdout
 end
 
+def dumped_schema
+  stream = StringIO.new
+  ActiveRecord::SchemaDumper.ignore_tables = []
+  ActiveRecord::SchemaDumper.dump(ActiveRecord::Base.connection, stream)
+  stream.string.lines.select {|l| /^\s*#/.match(l).nil? }.join
+end
+
 ActiveRecord::Base.configurations = {
   "enum_test" => {
     :adapter => "mysql2",

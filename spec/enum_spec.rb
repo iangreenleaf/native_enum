@@ -4,7 +4,7 @@ describe "ENUM datatype" do
 
   describe "schema dump" do
     before { load_schema "enum_old" }
-    subject { standard_dump }
+    subject { dumped_schema }
 
     it "dumps native format" do
       subject.should match %r{t\.enum\s+"color",\s+:limit => \["blue", "red", "yellow"\]}
@@ -44,13 +44,5 @@ describe "ENUM datatype" do
   describe "validation" do
     it "validates assigned value is member of the list"
     it "allows nil when null enabled"
-  end
-
-  private
-  def standard_dump
-    stream = StringIO.new
-    ActiveRecord::SchemaDumper.ignore_tables = []
-    ActiveRecord::SchemaDumper.dump(ActiveRecord::Base.connection, stream)
-    stream.string.lines.select {|l| /^\s*#/.match(l).nil? }.join
   end
 end

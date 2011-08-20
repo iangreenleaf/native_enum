@@ -4,7 +4,7 @@ describe "SET datatype" do
 
   describe "schema dump" do
     before { load_schema "set_old" }
-    subject { standard_dump }
+    subject { dumped_schema }
 
     it "dumps native format" do
       subject.should match %r{t\.set\s+"gadgets",\s+:limit => \["propeller", "tail gun", "gps"\]}
@@ -51,13 +51,5 @@ describe "SET datatype" do
     it "validates assigned values are members of the list"
     it "allows nil when null enabled"
     it "allows empty list"
-  end
-
-  private
-  def standard_dump
-    stream = StringIO.new
-    ActiveRecord::SchemaDumper.ignore_tables = []
-    ActiveRecord::SchemaDumper.dump(ActiveRecord::Base.connection, stream)
-    stream.string.lines.select {|l| /^\s*#/.match(l).nil? }.join
   end
 end
