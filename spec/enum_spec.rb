@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "activerecord_enum" do
+describe "ENUM datatype" do
 
   describe "schema dump" do
     before { load_schema "enum_old" }
@@ -51,6 +51,6 @@ describe "activerecord_enum" do
     stream = StringIO.new
     ActiveRecord::SchemaDumper.ignore_tables = []
     ActiveRecord::SchemaDumper.dump(ActiveRecord::Base.connection, stream)
-    stream.string
+    stream.string.lines.select {|l| /^\s*#/.match(l).nil? }.join
   end
 end
