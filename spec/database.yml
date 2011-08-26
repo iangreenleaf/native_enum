@@ -1,0 +1,7 @@
+mysql:
+  adapter: mysql2
+  host: localhost
+  database: enum_test
+  username: enum_test
+  password: enum_test
+  socket: /tmp/mysql.sock

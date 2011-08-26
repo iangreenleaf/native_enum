@@ -20,14 +20,5 @@ def dumped_schema
   stream.string.lines.select {|l| /^\s*#/.match(l).nil? }.join
 end
 
-ActiveRecord::Base.configurations = {
-  "enum_test" => {
-    :adapter => "mysql2",
-    :host => "localhost",
-    :username => "enum_test",
-    :password => "enum_test",
-    :database => "enum_test",
-    :socket => "/tmp/mysql.sock"
-  },
-}
-ActiveRecord::Base.establish_connection "enum_test"
+ActiveRecord::Base.configurations = YAML::load(IO.read("spec/database.yml"))
+ActiveRecord::Base.establish_connection "mysql"
