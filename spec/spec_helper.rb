@@ -21,4 +21,5 @@ def dumped_schema
 end
 
 ActiveRecord::Base.configurations = YAML::load(IO.read("spec/database.yml"))
-ActiveRecord::Base.establish_connection "mysql"
+db = ENV["DB"] || "mysql"
+ActiveRecord::Base.establish_connection db
