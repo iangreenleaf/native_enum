@@ -1,0 +1,5 @@
+before_script:
+  - "mysql -e 'create database activerecord_enum_test;' >/dev/null"
+  - "cp spec/{.travis.,}database.yml"
+env:
+  - DB=mysql
