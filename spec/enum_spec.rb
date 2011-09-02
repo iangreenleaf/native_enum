@@ -40,9 +40,4 @@ describe "ENUM datatype" do
       subject[ "Type" ].should == "enum('small','medium','large')"
     end
   end
-
-  describe "validation" do
-    it "validates assigned value is member of the list"
-    it "allows nil when null enabled"
-  end
 end

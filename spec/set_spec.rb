@@ -45,11 +45,6 @@ describe "SET datatype" do
     it "accepts single value"
     it "accepts array of values"
     it "accepts comma-separated values"
-  end
-
-  describe "validation" do
-    it "validates assigned values are members of the list"
-    it "allows nil when null enabled"
-    it "allows empty list"
+    it "accepts empty list"
   end
 end
