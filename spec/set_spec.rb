@@ -49,7 +49,6 @@ describe "SET datatype" do
       b.reload.gasses.should == "helium"
     end
     it "accepts array of values" do
-      pending "Not yet implemented"
       b = Balloon.create :gasses => [ "helium", "hydrogen" ]
       b.should be_valid
       b.reload.gasses.should == "helium,hydrogen"

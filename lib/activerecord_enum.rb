@@ -1,8 +1,22 @@
 require 'active_record'
+require 'active_record/base'
 require 'active_record/connection_adapters/mysql2_adapter'
 require 'active_record/connection_adapters/abstract/schema_definitions.rb'
+require 'active_record/attribute_methods/write'
 
-module ActiverecordEnum
+module ActiveRecord
+  module AttributeMethods
+    module Write
+      def write_attribute_with_enum(attr_name, value)
+        if (column = column_for_attribute(attr_name)) && column.set? && value.respond_to?(:join)
+          value = value.join ","
+        end
+        write_attribute_without_enum attr_name, value
+      end
+      alias_method :write_attribute_without_enum, :write_attribute
+      alias_method :write_attribute, :write_attribute_with_enum
+    end
+  end
 end
 
 module ActiveRecord
@@ -66,6 +80,14 @@ module ActiveRecord
         else
           extract_default default
         end
+      end
+
+      def set?
+        type == :set
+      end
+
+      def enum?
+        type == :enum
       end
     end
   end
