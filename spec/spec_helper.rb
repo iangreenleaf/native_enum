@@ -20,6 +20,10 @@ def dumped_schema
   stream.string.lines.select {|l| /^\s*#/.match(l).nil? }.join
 end
 
-ActiveRecord::Base.configurations = YAML::load(IO.read("spec/database.yml"))
+db_config = YAML::load(IO.read("spec/database.yml"))
+ActiveRecord::Base.configurations = db_config
 db = ENV["DB"] || "mysql"
 ActiveRecord::Base.establish_connection db
+RSpec.configure do |c|
+  c.filter_run_excluding :db_support => ! db_config[db]["supports_enums"]
+end

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "SET datatype" do
 
-  describe "schema dump" do
+  describe "schema dump", :db_support => true do
     before { load_schema "set_old" }
     subject { dumped_schema }
 
@@ -23,7 +23,7 @@ describe "SET datatype" do
     before { load_schema "set_new" }
     subject { ActiveRecord::Base.connection.select_one "SHOW FIELDS FROM balloons WHERE Field='ribbons'" }
 
-    it "loads native format" do
+    it "loads native format", :db_support => true do
       subject[ "Type" ].should == "set('red','green','gold')"
     end
 
@@ -35,7 +35,7 @@ describe "SET datatype" do
       subject[ "Null" ].should == "NO"
     end
 
-    it "loads native column format" do
+    it "loads native column format", :db_support => true do
       subject = ActiveRecord::Base.connection.select_one "SHOW FIELDS FROM balloons WHERE Field='gasses'"
       subject[ "Type" ].should == "set('helium','hydrogen')"
     end
