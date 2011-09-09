@@ -21,23 +21,27 @@ describe "ENUM datatype" do
 
   describe "schema loading" do
     before { load_schema "enum_new" }
-    subject { ActiveRecord::Base.connection.select_one "SHOW FIELDS FROM balloons WHERE Field='color'" }
+    subject { column_props :balloons, :color }
 
     it "loads native format", :db_support => true do
-      subject[ "Type" ].should == "enum('red','gold')"
+      subject[ :type ].should == "enum('red','gold')"
+    end
+
+    it "falls back to text when missing db support", :db_support => false do
+      subject[ :type ].should =~ /varchar/
     end
 
     it "loads default option" do
-      subject[ "Default" ].should == "gold"
+      subject[ :default ].should == "gold"
     end
 
     it "loads null option" do
-      subject[ "Null" ].should == "NO"
+      subject[ :null ].should be_false
     end
 
     it "loads native column format", :db_support => true do
-      subject = ActiveRecord::Base.connection.select_one "SHOW FIELDS FROM balloons WHERE Field='size'"
-      subject[ "Type" ].should == "enum('small','medium','large')"
+      subject = column_props :balloons, :size
+      subject[ :type ].should == "enum('small','medium','large')"
     end
   end
 end

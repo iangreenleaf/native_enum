@@ -21,23 +21,27 @@ describe "SET datatype" do
 
   describe "schema loading" do
     before { load_schema "set_new" }
-    subject { ActiveRecord::Base.connection.select_one "SHOW FIELDS FROM balloons WHERE Field='ribbons'" }
+    subject { column_props :balloons, :ribbons }
 
     it "loads native format", :db_support => true do
-      subject[ "Type" ].should == "set('red','green','gold')"
+      subject[ :type ].should == "set('red','green','gold')"
+    end
+
+    it "falls back to text when missing db support", :db_support => false do
+      subject[ :type ].should =~ /varchar/
     end
 
     it "loads default option" do
-      subject[ "Default" ].should == "green,gold"
+      subject[ :default ].should == "green,gold"
     end
 
     it "loads null option" do
-      subject[ "Null" ].should == "NO"
+      subject[ :null ].should be_false
     end
 
     it "loads native column format", :db_support => true do
-      subject = ActiveRecord::Base.connection.select_one "SHOW FIELDS FROM balloons WHERE Field='gasses'"
-      subject[ "Type" ].should == "set('helium','hydrogen')"
+      subject = column_props :balloons, :gasses
+      subject[ :type ].should == "set('helium','hydrogen')"
     end
   end
 
@@ -48,7 +52,7 @@ describe "SET datatype" do
       b.should be_valid
       b.reload.gasses.should == "helium"
     end
-    it "accepts array of values" do
+    it "accepts array of values", :db_support => true do
       b = Balloon.create :gasses => [ "helium", "hydrogen" ]
       b.should be_valid
       b.reload.gasses.should == "helium,hydrogen"
@@ -58,7 +62,7 @@ describe "SET datatype" do
       b.should be_valid
       b.reload.gasses.should == "helium,hydrogen"
     end
-    it "accepts empty list" do
+    it "accepts empty list", :db_support => true do
       b = Balloon.create :gasses => [ ]
       b.should be_valid
       b.reload.gasses.should == ""

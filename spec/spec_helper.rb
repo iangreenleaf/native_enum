@@ -20,6 +20,18 @@ def dumped_schema
   stream.string.lines.select {|l| /^\s*#/.match(l).nil? }.join
 end
 
+def column_props table, column
+  case ENV["DB"]
+  when "mysql"
+    result = ActiveRecord::Base.connection.select_one "SHOW FIELDS FROM #{table} WHERE Field='#{column}'"
+    { :type => result["Type"], :default => result["Default"], :null => ( result["Null"] == "YES" ) }
+  when "sqlite"
+    result = ActiveRecord::Base.connection.select_value "SELECT sql FROM sqlite_master WHERE type='table' AND name='#{table}'"
+    matches = /"#{column}" ([^[:space:]]+) (?:DEFAULT '([^[:space:]]+)')?( NOT NULL)?,/.match result
+    { :type => matches[1], :default => matches[2], :null => matches[3].nil? }
+  end
+end
+
 db_config = YAML::load(IO.read("spec/database.yml"))
 ActiveRecord::Base.configurations = db_config
 db = ENV["DB"] || "mysql"
