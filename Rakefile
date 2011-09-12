@@ -27,6 +27,7 @@ namespace :spec do
     db_config = YAML::load(IO.read(DB_CONFIG))
     db_config.each do |db,config|
       ENV["DB"] = db
+      Rake::Task["spec"].reenable
       Rake::Task["spec"].invoke
     end
   end
