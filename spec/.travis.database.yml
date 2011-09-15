@@ -2,3 +2,8 @@ mysql:
   adapter: mysql2
   database: activerecord_enum_test
   username:
+  supports_enums: true
+sqlite:
+  adapter: sqlite3
+  database: ":memory:"
+  supports_enums: false
