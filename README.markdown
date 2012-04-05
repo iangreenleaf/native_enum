@@ -8,7 +8,7 @@ Provides ActiveRecord support for the nonstandard `ENUM` and `SET` data types.
 
 ### Y U NO WORK?! ###
 
-Sorry, it currently only works with Rails 3.0.x and the mysql2 and sqlite adapters. I plan to support 3.1.x and other standard adapters at some point.
+Sorry, it currently only works with Rails 3.x and the mysql2 and sqlite adapters. I plan to support other standard adapters at some point.
 
 ### Why doesn't it validate anything? ###
 

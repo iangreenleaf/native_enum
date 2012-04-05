@@ -6,7 +6,9 @@ require 'active_record/connection_adapters/abstract/schema_definitions.rb'
 
 module ActiveRecord
   module ConnectionAdapters
-    class Mysql2Adapter < AbstractAdapter
+    existing_class = defined?( Mysql2Adapter ) ? Mysql2Adapter : AbstractMysqlAdapter
+
+    existing_class.class_eval do
       def native_database_types_with_enum
         native_database_types_without_enum.merge( :enum => { :name => "enum" }, :set => { :name => "set" } )
       end
