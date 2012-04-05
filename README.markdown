@@ -4,6 +4,16 @@ Provides ActiveRecord support for the nonstandard `ENUM` and `SET` data types.
 
 [![Build Status](http://travis-ci.org/iangreenleaf/activerecord_enum.png)](http://travis-ci.org/iangreenleaf/activerecord_enum)
 
+## Running the tests ##
+
+To run the tests for all supported database adapters:
+
+    rake spec:all
+
+To run the tests for just one adapter:
+
+    DB=mysql rake spec
+
 ## Hypothetically asked questions ##
 
 ### Y U NO WORK?! ###
