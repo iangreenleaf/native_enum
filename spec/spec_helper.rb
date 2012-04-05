@@ -1,6 +1,10 @@
 require 'rspec'
 require 'activerecord_enum'
 
+def db
+  ENV["DB"] || "mysql"
+end
+
 def load_schema filename
   # silence verbose schema loading
   original_stdout = $stdout
@@ -21,7 +25,7 @@ def dumped_schema
 end
 
 def column_props table, column
-  case ENV["DB"]
+  case db
   when "mysql"
     result = ActiveRecord::Base.connection.select_one "SHOW FIELDS FROM #{table} WHERE Field='#{column}'"
     { :type => result["Type"], :default => result["Default"], :null => ( result["Null"] == "YES" ) }
@@ -34,7 +38,6 @@ end
 
 db_config = YAML::load(IO.read("spec/database.yml"))
 ActiveRecord::Base.configurations = db_config
-db = ENV["DB"] || "mysql"
 ActiveRecord::Base.establish_connection db
 RSpec.configure do |c|
   c.filter_run_excluding :db_support => ! db_config[db]["supports_enums"]
