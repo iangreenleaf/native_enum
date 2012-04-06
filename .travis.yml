@@ -1,5 +1,8 @@
+language: ruby
+rvm:
+  - 1.8.7
+  - 1.9.3
 before_script:
   - "mysql -e 'create database activerecord_enum_test;' >/dev/null"
   - "cp spec/{.travis.,}database.yml"
-env:
-  - DB=mysql
+script: ./spec/all_rails
