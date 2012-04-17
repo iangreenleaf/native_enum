@@ -1,6 +1,4 @@
 require 'rspec'
-require 'sqlite3'
-require 'activerecord_enum'
 
 def db
   ENV["DB"] || "mysql"
@@ -38,6 +36,10 @@ def column_props table, column
 end
 
 db_config = YAML::load(IO.read("spec/database.yml"))
+
+require db_config[db]["adapter"]
+require 'activerecord_enum'
+
 ActiveRecord::Base.configurations = db_config
 ActiveRecord::Base.establish_connection db
 RSpec.configure do |c|
