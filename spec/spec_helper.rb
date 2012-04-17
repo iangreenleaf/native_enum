@@ -1,4 +1,5 @@
 require 'rspec'
+require 'sqlite3'
 require 'activerecord_enum'
 
 def db
