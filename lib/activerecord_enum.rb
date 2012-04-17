@@ -1,7 +1,6 @@
 require 'active_record'
 require 'active_record/base'
 require 'active_record/connection_adapters/mysql2_adapter'
-require 'active_record/connection_adapters/sqlite3_adapter'
 require 'active_record/connection_adapters/abstract/schema_definitions.rb'
 
 module ActiveRecord
@@ -30,20 +29,19 @@ module ActiveRecord
         list.to_a.map{|n| "'#{n}'"}.join(",")
       end
     end
-  end
-end
 
-module ActiveRecord
-  module ConnectionAdapters
-    class SQLite3Adapter < SQLiteAdapter
-      def type_to_sql_with_enum type, limit=nil, *args
-        if type.to_s == "enum" || type.to_s == "set"
-          type, limit = :string, nil
+    if defined?( SQLite3 )
+      require 'active_record/connection_adapters/sqlite3_adapter'
+      class SQLite3Adapter < SQLiteAdapter
+        def type_to_sql_with_enum type, limit=nil, *args
+          if type.to_s == "enum" || type.to_s == "set"
+            type, limit = :string, nil
+          end
+          type_to_sql_without_enum type, limit, *args
         end
-        type_to_sql_without_enum type, limit, *args
+        alias_method :type_to_sql_without_enum, :type_to_sql
+        alias_method :type_to_sql, :type_to_sql_with_enum
       end
-      alias_method :type_to_sql_without_enum, :type_to_sql
-      alias_method :type_to_sql, :type_to_sql_with_enum
     end
   end
 end
