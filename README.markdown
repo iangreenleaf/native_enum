@@ -2,7 +2,7 @@
 
 Provides ActiveRecord support for the nonstandard `ENUM` and `SET` data types.
 
-[![Build Status](http://travis-ci.org/iangreenleaf/activerecord_enum.png)](http://travis-ci.org/iangreenleaf/activerecord_enum)
+[![Build Status](https://travis-ci.org/iangreenleaf/activerecord_enum.png?branch=master)](http://travis-ci.org/iangreenleaf/activerecord_enum)
 
 ## Running the tests ##
 
