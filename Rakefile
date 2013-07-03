@@ -1,4 +1,5 @@
 require 'bundler'
+require 'yaml'
 Bundler::GemHelper.install_tasks
 
 DB_CONFIG = "spec/database.yml"
