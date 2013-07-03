@@ -7,15 +7,15 @@ describe "ENUM datatype" do
     subject { dumped_schema }
 
     it "dumps native format" do
-      subject.should match %r{t\.enum\s+"color",\s+:limit => \["blue", "red", "yellow"\]}
+      subject.should match %r{t\.enum\s+"color",\s+(:limit =>|limit:) \["blue", "red", "yellow"\]}
     end
 
     it "dumps default option" do
-      subject.should match %r{t\.enum\s+"color",.+:default => "red"}
+      subject.should match %r{t\.enum\s+"color",.+(:default =>|default:) "red"}
     end
 
     it "dumps null option" do
-      subject.should match %r{t\.enum\s+"color",.+:null => false$}
+      subject.should match %r{t\.enum\s+"color",.+(:null =>|null:) false$}
     end
   end
 

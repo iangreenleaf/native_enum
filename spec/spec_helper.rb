@@ -1,4 +1,5 @@
 require 'rspec'
+require 'yaml'
 
 def db
   ENV["DB"] || "mysql"

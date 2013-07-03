@@ -7,15 +7,15 @@ describe "SET datatype" do
     subject { dumped_schema }
 
     it "dumps native format" do
-      subject.should match %r{t\.set\s+"gadgets",\s+:limit => \["propeller", "tail gun", "gps"\]}
+      subject.should match %r{t\.set\s+"gadgets",\s+(:limit =>|limit:) \["propeller", "tail gun", "gps"\]}
     end
 
     it "dumps default option" do
-      subject.should match %r{t\.set\s+"gadgets",.+:default => \["propeller", "gps"\]}
+      subject.should match %r{t\.set\s+"gadgets",.+(:default =>|default:) \["propeller", "gps"\]}
     end
 
     it "dumps null option" do
-      subject.should match %r{t\.set\s+"gadgets",.+:null => false$}
+      subject.should match %r{t\.set\s+"gadgets",.+(:null =>|null:) false$}
     end
   end
 
