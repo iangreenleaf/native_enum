@@ -41,3 +41,5 @@ For SET columns, you may be interested in [iangreenleaf/active_set](https://gith
 This isn't a plugin everyone should use. There are a number of plugins to simulate enum behavior backed by standard data types. Personally, I like [nofxx/symbolize](https://github.com/nofxx/symbolize).
 
 However, sometimes we can't or won't avoid working with these data types. When that happens, I got you covered.
+
+## [Contributors](https://github.com/iangreenleaf/activerecord_enum/graphs/contributors) ##
