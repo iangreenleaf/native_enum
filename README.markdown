@@ -22,7 +22,13 @@ To run the tests for just one adapter:
 
 ### Y U NO WORK?! ###
 
-Sorry, it currently only works with Rails 3.x and the mysql2 and sqlite adapters. I plan to support other standard adapters at some point.
+It currently works with:
+
+ * Rails 3.0, 3.1, 3.2, 4.0.
+ * The `mysql2` and `sqlite` adapters.
+ * Ruby 1.9.3, 2.0.0. It probably also works with Ruby 1.8, but that is unsupported.
+
+If you'd like to support other adapters, pull requests are welcome!
 
 ### Why doesn't it validate anything? ###
 
