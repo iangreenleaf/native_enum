@@ -4,19 +4,29 @@ Provides ActiveRecord support for the nonstandard `ENUM` and `SET` data types.
 
 [![Build Status](https://travis-ci.org/iangreenleaf/activerecord_enum.png?branch=master)](http://travis-ci.org/iangreenleaf/activerecord_enum)
 
-## Running the tests ##
+## How now? ##
 
-To run the tests for all supported database adapters:
+It sucks to have ActiveRecord not understand your `ENUM` columns and constantly write the wrong thing to your `schema.rb`.
+It also sucks to work with a database that uses `ENUM` in production when you'd prefer sqlite in development.
+Wait no longer...
 
-    rake spec:all
+```ruby
+create_table :balloons, :force => true do |t|
+  t.enum "color", :limit => ['red', 'gold'], :default => 'gold', :null => false
+  # or...
+  t.column "size", :enum, :limit => ['small', 'medium', 'large']
+end
+```
 
-To run the tests for all adapters and all versions of ActiveRecord:
+Your schema<->db coupling will work again, and it will fall back to a `VARCHAR` column on any adapters that don't support `ENUM`.
 
-    ./spec/all_rails
+## Installation ##
 
-To run the tests for just one adapter:
+```
+gem 'activerecord_enum'
+```
 
-    DB=mysql rake spec
+Boy, that was easy.
 
 ## Hypothetically asked questions ##
 
@@ -48,4 +58,22 @@ This isn't a plugin everyone should use. There are a number of plugins to simula
 
 However, sometimes we can't or won't avoid working with these data types. When that happens, I got you covered.
 
-## [Contributors](https://github.com/iangreenleaf/activerecord_enum/graphs/contributors) ##
+## Contributing ##
+
+Pull requests welcome! Join
+[this lovely bunch of people](https://github.com/iangreenleaf/activerecord_enum/graphs/contributors).
+
+
+### Running the tests ###
+
+To run the tests for all supported database adapters:
+
+    rake spec:all
+
+To run the tests for all adapters and all versions of ActiveRecord:
+
+    ./spec/all_rails
+
+To run the tests for just one adapter:
+
+    DB=mysql rake spec
