@@ -7,15 +7,15 @@ describe "ENUM datatype" do
     subject { dumped_schema }
 
     it "dumps native format" do
-      subject.should match %r{t\.enum\s+"color",\s+(:limit =>|limit:) \["blue", "red", "yellow"\]}
+      expect(subject).to match %r{t\.enum\s+"color",\s+(:limit =>|limit:) \["blue", "red", "yellow"\]}
     end
 
     it "dumps default option" do
-      subject.should match %r{t\.enum\s+"color",.+(:default =>|default:) "red"}
+      expect(subject).to match %r{t\.enum\s+"color",.+(:default =>|default:) "red"}
     end
 
     it "dumps null option" do
-      subject.should match %r{t\.enum\s+"color",.+(:null =>|null:) false$}
+      expect(subject).to match %r{t\.enum\s+"color",.+(:null =>|null:) false$}
     end
   end
 
@@ -24,24 +24,24 @@ describe "ENUM datatype" do
     subject { column_props :balloons, :color }
 
     it "loads native format", :db_support => true do
-      subject[ :type ].should == "enum('red','gold')"
+      expect(subject[:type]).to eq("enum('red','gold')")
     end
 
     it "falls back to text when missing db support", :db_support => false do
-      subject[ :type ].should =~ /varchar/
+      expect(subject[:type]).to match(/varchar/)
     end
 
     it "loads default option" do
-      subject[ :default ].should == "gold"
+      expect(subject[:default]).to eq("gold")
     end
 
     it "loads null option" do
-      subject[ :null ].should be_false
+      expect(subject[:null]).to eq(false)
     end
 
     it "loads native column format", :db_support => true do
       subject = column_props :balloons, :size
-      subject[ :type ].should == "enum('small','medium','large')"
+      expect(subject[:type]).to eq("enum('small','medium','large')")
     end
   end
 end

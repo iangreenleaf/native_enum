@@ -42,7 +42,7 @@ require db_config[db]["adapter"]
 require 'activerecord_enum'
 
 ActiveRecord::Base.configurations = db_config
-ActiveRecord::Base.establish_connection db
+ActiveRecord::Base.establish_connection db.to_sym
 RSpec.configure do |c|
   c.filter_run_excluding :db_support => ! db_config[db]["supports_enums"]
 end
