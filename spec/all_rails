@@ -1,7 +1,0 @@
-#!/bin/bash
-
-#TODO: turn this into a rake task
-for f in spec/Gemfile.rails_[0-9]_[0-9]; do
-  bundle install --gemfile "$f" &&
-  bundle exec rake spec:all || exit $?
-done

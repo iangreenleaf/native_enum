@@ -5,4 +5,4 @@ rvm:
 before_script:
   - "mysql -e 'create database activerecord_enum_test;' >/dev/null"
   - "cp spec/{.travis.,}database.yml"
-script: ./spec/all_rails
+script: bundle exec rake spec:rails_all
