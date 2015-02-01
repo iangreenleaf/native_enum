@@ -44,7 +44,7 @@ namespace :spec do
     versions.each do |gemfile|
       puts "Running specs for Gemfile: #{gemfile}"
       Bundler.with_clean_env do
-        sh "bundle install --gemfile '#{gemfile}' --path 'spec/vendor/#{gemfile}'"
+        sh "bundle install --gemfile '#{gemfile}' --path 'vendor/#{File.extname(gemfile).slice(1..-1)}'"
         sh "BUNDLE_GEMFILE='#{gemfile}' bundle exec rake spec:all"
       end
     end
