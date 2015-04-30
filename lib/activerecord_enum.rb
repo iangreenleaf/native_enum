@@ -5,9 +5,7 @@ require 'active_record/connection_adapters/abstract/schema_definitions.rb'
 require 'connection_adapters/sqlite3' if defined?( SQLite3 )
 require 'connection_adapters/mysql2' if defined?( Mysql2 )
 
-ACTIVE_RECORD_VERSION = ActiveRecord::VERSION
-
-if ACTIVE_RECORD_VERSION::MAJOR < 4 || (ACTIVE_RECORD_VERSION::MAJOR == 4 && ACTIVE_RECORD_VERSION::MINOR <= 1)
+if ActiveRecord::VERSION::MAJOR < 4 || (ActiveRecord::VERSION::MAJOR == 4 && ActiveRecord::VERSION::MINOR <= 1)
   require 'activerecord_enum/activerecord_enum_pre42.rb'
 else
   require 'activerecord_enum/activerecord_enum_post42.rb'
