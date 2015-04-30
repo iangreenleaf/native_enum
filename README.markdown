@@ -1,6 +1,6 @@
 # ActiveRecord Enum #
 
-Provides ActiveRecord support for the nonstandard `ENUM` and `SET` data types.
+Provides ActiveRecord (and thus Rails) support for the nonstandard `ENUM` and `SET` data types.
 
 [![Build Status](https://travis-ci.org/iangreenleaf/activerecord_enum.png?branch=master)](http://travis-ci.org/iangreenleaf/activerecord_enum)
 
@@ -34,7 +34,7 @@ Boy, that was easy.
 
 It currently works with:
 
- * Rails 3.0, 3.1, 3.2, 4.0.
+ * ActiveRecord 3.x and 4.0, 4.1, and 4.2.
  * The `mysql2` and `sqlite` adapters.
  * Ruby 1.9.3, 2.0.0. It probably also works with Ruby 1.8, but that is unsupported.
 
