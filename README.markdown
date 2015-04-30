@@ -72,7 +72,7 @@ To run the tests for all supported database adapters:
 
 To run the tests for all adapters and all versions of ActiveRecord:
 
-    ./spec/all_rails
+    rake spec:rails_all
 
 To run the tests for just one adapter:
 
