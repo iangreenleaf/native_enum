@@ -36,7 +36,7 @@ It currently works with:
 
  * ActiveRecord 3.x and 4.0, 4.1, and 4.2.
  * The `mysql2` and `sqlite` adapters.
- * Ruby 1.9.3, 2.0.0. It probably also works with Ruby 1.8, but that is unsupported.
+ * Ruby 1.9.3, 2.0.x, 2.1.x, and 2.2.x.
 
 If you'd like to support other adapters, pull requests are welcome!
 
