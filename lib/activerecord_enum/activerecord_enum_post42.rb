@@ -1,10 +1,3 @@
-require 'active_record'
-require 'active_record/base'
-require 'active_record/connection_adapters/abstract/schema_definitions.rb'
-
-require 'connection_adapters/sqlite3' if defined?( SQLite3 )
-require 'connection_adapters/mysql2' if defined?( Mysql2 )
-
 module ActiveRecord
   module ConnectionAdapters
     class AbstractMysqlAdapter
@@ -62,24 +55,6 @@ module ActiveRecord
 
       def type_cast_from_database(value)
         value.split(",")
-      end
-    end
-  end
-end
-
-module ActiveRecord
-  module ConnectionAdapters
-    class TableDefinition
-      def enum *args
-        options = args.extract_options!
-        column_names = args
-        column_names.each { |name| column(name, :enum, options) }
-      end
-      def set *args
-        options = args.extract_options!
-        options[:default] = options[:default].join "," if options[:default].present?
-        column_names = args
-        column_names.each { |name| column(name, :set, options) }
       end
     end
   end
