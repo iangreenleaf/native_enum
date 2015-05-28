@@ -48,7 +48,7 @@ For ENUM columns, you may be satisfied with something simple:
 
     validates_inclusion_of :attr, :in => [ :possible, :values ]
 
-Or if you prefer more bells and whistles, try [nofxx/symbolize](https://github.com/nofxx/symbolize).
+Or if you prefer more bells and whistles, try [brainspec/enumerize](https://github.com/brainspec/enumerize).
 
 For SET columns, you may be interested in [iangreenleaf/active_set](https://github.com/iangreenleaf/active_set).
 
