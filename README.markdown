@@ -40,6 +40,12 @@ It currently works with:
 
 If you'd like to support other adapters, pull requests are welcome!
 
+### I thought Rails 4.1+ did enums? ###
+
+[ActiveRecord::Enum](http://api.rubyonrails.org/classes/ActiveRecord/Enum.html) is actually a layer that takes an integer column in the DB and *presents* it as an enum type.
+This gem provides compatibility for *native* `ENUM` types in the DB.
+These are fundamentally different approaches, with different motivations, costs and benefits.
+
 ### Why doesn't it validate anything? ###
 
 Following ActiveRecord's lead, this plugin doesn't do any validation work itself.
