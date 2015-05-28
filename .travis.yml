@@ -5,7 +5,7 @@ rvm:
   - "2.1"
   - "2.2"
 before_script:
-  - "mysql -e 'create database activerecord_enum_test;' >/dev/null"
+  - "mysql -e 'create database native_enum_test;' >/dev/null"
   - "cp spec/{.travis.,}database.yml"
 script: bundle exec rake spec:rails_all
 sudo: false

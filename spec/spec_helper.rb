@@ -39,7 +39,7 @@ end
 db_config = YAML::load(IO.read("spec/database.yml"))
 
 require db_config[db]["adapter"]
-require 'activerecord_enum'
+require 'native_enum'
 
 ActiveRecord::Base.configurations = db_config
 ActiveRecord::Base.establish_connection db.to_sym

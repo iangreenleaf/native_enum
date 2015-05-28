@@ -6,9 +6,9 @@ require 'connection_adapters/sqlite3' if defined?( SQLite3 )
 require 'connection_adapters/mysql2' if defined?( Mysql2 )
 
 if ActiveRecord::VERSION::MAJOR < 4 || (ActiveRecord::VERSION::MAJOR == 4 && ActiveRecord::VERSION::MINOR <= 1)
-  require 'activerecord_enum/activerecord_enum_pre42.rb'
+  require 'native_enum/activerecord_enum_pre42.rb'
 else
-  require 'activerecord_enum/activerecord_enum_post42.rb'
+  require 'native_enum/activerecord_enum_post42.rb'
 end
 
 module ActiveRecord

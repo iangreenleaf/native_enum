@@ -1,3 +1,3 @@
-module ActiverecordEnum
+module NativeEnum
   VERSION = "0.4.0"
 end
