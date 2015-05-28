@@ -26,7 +26,7 @@ Your schema<->db coupling will work again, and it will fall back to a `VARCHAR` 
 gem 'activerecord_enum'
 ```
 
-Boy, that was easy.
+Gosh, that was easy.
 
 ## Hypothetically asked questions ##
 
