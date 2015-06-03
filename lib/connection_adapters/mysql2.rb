@@ -2,7 +2,7 @@ require 'active_record/connection_adapters/mysql2_adapter'
 
 module ActiveRecord
   module ConnectionAdapters
-    existing_class = defined?( Mysql2Adapter ) ? Mysql2Adapter : AbstractMysqlAdapter
+    existing_class = ActiveRecord::VERSION::MAJOR < 4 && defined?( Mysql2Adapter ) ? Mysql2Adapter : AbstractMysqlAdapter
 
     existing_class.class_eval do
       def native_database_types_with_enum
