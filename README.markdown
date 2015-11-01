@@ -30,7 +30,7 @@ Make sure to put this line *after* the line for your database adapter gem, like 
 
 ```
 gem 'mysql2', '~> 0.3.20'
-gem 'activerecord_enum'
+gem 'native_enum'
 ```
 
 That's it!
