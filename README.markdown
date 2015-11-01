@@ -1,4 +1,4 @@
-# Native Enum #
+# Native ENUM types in ActiveRecord #
 
 Provides ActiveRecord (and thus Rails) support for the nonstandard `ENUM` and `SET` data types.
 
