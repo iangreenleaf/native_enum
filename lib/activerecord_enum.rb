@@ -14,12 +14,23 @@ end
 module ActiveRecord
   module ConnectionAdapters
     class TableDefinition
+
       def enum *args
+        if defined?(ActiveSupport)
+          ActiveSupport::Deprecation.warn(
+            %q{The 'activerecord_enum' gem has a new name! Please install the 'native_enum' gem instead.}
+          )
+        end
         options = args.extract_options!
         column_names = args
         column_names.each { |name| column(name, :enum, options) }
       end
       def set *args
+        if defined?(ActiveSupport)
+          ActiveSupport::Deprecation.warn(
+            %q{The 'activerecord_enum' gem has a new name! Please install the 'native_enum' gem instead.}
+          )
+        end
         options = args.extract_options!
         options[:default] = options[:default].join "," if options[:default].present?
         column_names = args

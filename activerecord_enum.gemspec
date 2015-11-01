@@ -11,6 +11,7 @@ Gem::Specification.new do |s|
   s.homepage    = ""
   s.summary     = %q{Enum data types for ActiveRecord}
   s.description = %q{Adds the ENUM data type natively to ActiveRecord.}
+  s.post_install_message = %q{The 'activerecord_enum' gem has a new name! Please install the 'native_enum' gem instead.}
 
   s.rubyforge_project = "activerecord_enum"
 
