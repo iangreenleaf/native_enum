@@ -11,6 +11,7 @@ Gem::Specification.new do |s|
   s.homepage    = ""
   s.summary     = %q{Enum data types for ActiveRecord}
   s.description = %q{Adds the ENUM data type natively to ActiveRecord.}
+  s.license = "MIT"
 
   s.rubyforge_project = "native_enum"
 
