@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = NativeEnum::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Ian Young"]
-  s.email       = ["ian.greenleaf+github@gmail.com"]
+  s.email       = ["dev@iangreenleaf.com"]
   s.homepage    = ""
   s.summary     = %q{Enum data types for ActiveRecord}
   s.description = %q{Adds the ENUM data type natively to ActiveRecord.}
