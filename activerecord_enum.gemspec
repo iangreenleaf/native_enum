@@ -1,10 +1,10 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "activerecord_enum/version"
+require "native_enum/version"
 
 Gem::Specification.new do |s|
-  s.name        = "activerecord_enum"
-  s.version     = ActiverecordEnum::VERSION
+  s.name        = "native_enum"
+  s.version     = NativeEnum::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Ian Young"]
   s.email       = ["ian.greenleaf+github@gmail.com"]
@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.summary     = %q{Enum data types for ActiveRecord}
   s.description = %q{Adds the ENUM data type natively to ActiveRecord.}
 
-  s.rubyforge_project = "activerecord_enum"
+  s.rubyforge_project = "native_enum"
 
   s.add_dependency "activerecord", ">= 3.0"
   s.add_development_dependency "rake"

@@ -1,8 +1,8 @@
-# ActiveRecord Enum #
+# Native Enum #
 
 Provides ActiveRecord (and thus Rails) support for the nonstandard `ENUM` and `SET` data types.
 
-[![Build Status](https://travis-ci.org/iangreenleaf/activerecord_enum.png?branch=master)](http://travis-ci.org/iangreenleaf/activerecord_enum)
+[![Build Status](https://travis-ci.org/iangreenleaf/native_enum.png?branch=master)](http://travis-ci.org/iangreenleaf/native_enum)
 
 ## How now? ##
 
@@ -23,7 +23,7 @@ Your schema<->db coupling will work again, and it will fall back to a `VARCHAR` 
 ## Installation ##
 
 ```
-gem 'activerecord_enum'
+gem 'native_enum'
 ```
 
 Make sure to put this line *after* the line for your database adapter gem, like so:
@@ -74,7 +74,7 @@ However, sometimes we can't or won't avoid working with these data types. When t
 ## Contributing ##
 
 Pull requests welcome! Join
-[this lovely bunch of people](https://github.com/iangreenleaf/activerecord_enum/graphs/contributors).
+[this lovely bunch of people](https://github.com/iangreenleaf/native_enum/graphs/contributors).
 
 
 ### Running the tests ###
