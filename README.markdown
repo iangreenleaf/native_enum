@@ -26,7 +26,14 @@ Your schema<->db coupling will work again, and it will fall back to a `VARCHAR` 
 gem 'activerecord_enum'
 ```
 
-Gosh, that was easy.
+Make sure to put this line *after* the line for your database adapter gem, like so:
+
+```
+gem 'mysql2', '~> 0.3.20'
+gem 'activerecord_enum'
+```
+
+That's it!
 
 ## Hypothetically asked questions ##
 
