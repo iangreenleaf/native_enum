@@ -6,15 +6,8 @@ def db
 end
 
 def load_schema filename
-  # silence verbose schema loading
-  original_stdout = $stdout
-  $stdout = StringIO.new
-
   root = File.expand_path(File.dirname(__FILE__))
   load root + "/schema/#{filename}.rb"
-
-ensure
-  $stdout = original_stdout
 end
 
 def dumped_schema
@@ -43,6 +36,8 @@ require 'native_enum'
 
 ActiveRecord::Base.configurations = db_config
 ActiveRecord::Base.establish_connection db.to_sym
+# Silence AR's logging (e.g. when loading the schema)
+ActiveRecord::Migration.verbose = false
 RSpec.configure do |c|
   c.filter_run_excluding :db_support => ! db_config[db]["supports_enums"]
 end
