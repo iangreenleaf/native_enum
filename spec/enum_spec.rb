@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "ENUM datatype" do
+RSpec.describe "ENUM datatype" do
 
   describe "schema dump", :db_support => true do
     before { load_schema "enum_old" }
