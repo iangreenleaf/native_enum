@@ -6,20 +6,29 @@ rvm:
   - "2.3"
   - "2.4"
   - "2.5"
+gemfile:
+  - gemfiles/activerecord_4.1.gemfile
+  - gemfiles/activerecord_4.2.gemfile
+  - gemfiles/activerecord_5.0.gemfile
+  - gemfiles/activerecord_5.1.gemfile
+env:
+  - DB=mysql
+  - DB=sqlite
 matrix:
   allow_failures:
     # Allow 2.5 to fail until Travis CI bug is fixed. See:
     # * https://github.com/travis-ci/travis-ci/issues/8978
     # * https://github.com/travis-ci/travis-ci/issues/8969
     - rvm: "2.5"
-  gemfiles:
-    - gemfiles/activerecord_4.1.gemfile
-    - gemfiles/activerecord_4.2.gemfile
-    - gemfiles/activerecord_5.0.gemfile
-    - gemfiles/activerecord_5.1.gemfile
-  env: 
-    - DB=mysql
-    - DB=sqlite
+  exclude:
+   - rvm: "2.0"
+     gemfile: gemfiles/activerecord_5.0.gemfile
+   - rvm: "2.0"
+     gemfile: gemfiles/activerecord_5.1.gemfile
+   - rvm: "2.1"
+     gemfile: gemfiles/activerecord_5.0.gemfile
+   - rvm: "2.1"
+     gemfile: gemfiles/activerecord_5.1.gemfile
 before_script:
   - "cp spec/{.travis.,}database.yml"
   - "bundle exec rake db:prepare"
