@@ -12,8 +12,16 @@ matrix:
     # * https://github.com/travis-ci/travis-ci/issues/8978
     # * https://github.com/travis-ci/travis-ci/issues/8969
     - rvm: "2.5"
+  gemfiles:
+    - gemfiles/activerecord_4.1.gemfile
+    - gemfiles/activerecord_4.2.gemfile
+    - gemfiles/activerecord_5.0.gemfile
+    - gemfiles/activerecord_5.1.gemfile
+  env: 
+    - DB=mysql
+    - DB=sqlite
 before_script:
   - "cp spec/{.travis.,}database.yml"
   - "bundle exec rake db:prepare"
-script: bundle exec rake spec:rails_all
+script: bundle exec rake spec
 sudo: false

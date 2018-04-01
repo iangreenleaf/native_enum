@@ -53,23 +53,10 @@ desc 'Run the test suite for all DBs.'
 namespace :spec do
   task :all do
     db_config = YAML::load(IO.read(DB_CONFIG))
-    db_config.each do |db,config|
+    db_config.each do |db, config|
       ENV["DB"] = db
       Rake::Task["spec"].reenable
       Rake::Task["spec"].invoke
-    end
-  end
-
-  desc 'Run the test suite for all supported versions of rails and all DBs'
-  task :rails_all do
-    STDOUT.sync = true
-    versions = Dir.glob(GEMFILES)
-    versions.each do |gemfile|
-      puts "Running specs for Gemfile: #{gemfile}"
-      Bundler.with_clean_env do
-        sh "bundle install --gemfile '#{gemfile}' --path 'vendor/#{File.extname(gemfile).slice(1..-1)}'"
-        sh "BUNDLE_GEMFILE='#{gemfile}' bundle exec rake spec:all"
-      end
     end
   end
 end
