@@ -9,13 +9,36 @@ require 'rake'
 desc 'Default: run all unit tests.'
 task :default => :"spec:all"
 
+require 'active_record'
+
+# For more info on DatabaseTasks, see:
+# https://github.com/rails/rails/blob/v5.0.7/activerecord/lib/active_record/tasks/database_tasks.rb
 namespace :db do
-  desc 'Prepare the databases.'
-  task :prepare do
-    unless File.exist? DB_CONFIG
-      cp "#{config_file}.tmpl", DB_CONFIG
+  task :load_config do
+    db_configs = YAML.load_file('spec/database.yml')
+    ActiveRecord::Tasks::DatabaseTasks.tap do |db_tasks|
+      ActiveRecord::Base.configurations = db_configs
+      db_tasks.database_configuration = db_configs
+      db_tasks.db_dir = 'db'
+      db_tasks.root = File.dirname(__FILE__)
     end
-    #TODO would be nice to create the DBs here
+  end
+
+  desc 'Prepare the databases.'
+  task prepare: :load_config do
+    unless File.exist? DB_CONFIG
+      cp "#{DB_CONFIG}.tmpl", DB_CONFIG
+    end
+
+    ActiveRecord::Tasks::DatabaseTasks.tap do |db_tasks|
+      db_tasks.create_current('mysql')
+      db_tasks.create_current('sqlite')
+    end
+  end
+
+  desc "Drop all databases created for testing"
+  task drop_all: :load_config do
+    ActiveRecord::Tasks::DatabaseTasks.drop_all
   end
 end
 
