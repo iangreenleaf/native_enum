@@ -3,7 +3,7 @@ module ActiveRecord
     if defined?(AbstractMysqlAdapter)
       class AbstractMysqlAdapter
         protected
-        def initialize_type_map_with_enum(m)
+        def initialize_type_map_with_enum(m = type_map)
           initialize_without_enum(m)
           register_enum_type(m, %r(^enum)i)
           register_set_type(m, %r(^set)i)
