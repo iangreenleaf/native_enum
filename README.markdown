@@ -79,14 +79,14 @@ Pull requests welcome! Join
 
 ### Running the tests ###
 
-To run the tests for all supported database adapters:
-
-    rake spec:all
-
 To run the tests for all adapters and all versions of ActiveRecord:
 
-    rake spec:rails_all
+    appraisal rake spec:all
 
-To run the tests for just one adapter:
+To run the tests for a specific adapter:
 
     DB=mysql rake spec
+
+To run the tests for a specific version of ActiveRecord:
+
+    appraisal activerecord-5.2 rake spec:all
