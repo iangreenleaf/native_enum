@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "SET datatype" do
+RSpec.describe "SET datatype" do
 
   describe "schema dump", :db_support => true do
     before { load_schema "set_old" }

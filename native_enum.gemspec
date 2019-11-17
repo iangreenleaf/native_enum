@@ -20,7 +20,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency "bundler"
   s.add_development_dependency "mysql2", "~> 0.3.11"
   s.add_development_dependency "sqlite3", "~>1.3.4"
-  s.add_development_dependency "rspec", "~> 3.1.0"
+  s.add_development_dependency "rspec", "~> 3"
+  s.add_development_dependency "appraisal"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
