@@ -17,11 +17,6 @@ env:
   - DB=mysql
   - DB=sqlite
 matrix:
-  allow_failures:
-    # Allow 2.5 to fail until Travis CI bug is fixed. See:
-    # * https://github.com/travis-ci/travis-ci/issues/8978
-    # * https://github.com/travis-ci/travis-ci/issues/8969
-    - rvm: "2.5"
   exclude:
    - rvm: "2.0"
      gemfile: gemfiles/activerecord_5.0.gemfile
