@@ -3,5 +3,6 @@
 source "http://rubygems.org"
 
 gem "activerecord", "~> 4.1.0"
+gem "minitest", "< 5.12"
 
 gemspec path: "../"
