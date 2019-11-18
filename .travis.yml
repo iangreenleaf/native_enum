@@ -1,11 +1,34 @@
 language: ruby
+services:
+  - mysql
 rvm:
-  - 1.9.3
   - "2.0"
   - "2.1"
   - "2.2"
+  - "2.3"
+  - "2.4"
+  - "2.5"
+  - "2.6"
+gemfile:
+  - gemfiles/activerecord_4.1.gemfile
+  - gemfiles/activerecord_4.2.gemfile
+  - gemfiles/activerecord_5.0.gemfile
+  - gemfiles/activerecord_5.1.gemfile
+env:
+  - DB=mysql
+  - DB=sqlite
+matrix:
+  exclude:
+   - rvm: "2.0"
+     gemfile: gemfiles/activerecord_5.0.gemfile
+   - rvm: "2.0"
+     gemfile: gemfiles/activerecord_5.1.gemfile
+   - rvm: "2.1"
+     gemfile: gemfiles/activerecord_5.0.gemfile
+   - rvm: "2.1"
+     gemfile: gemfiles/activerecord_5.1.gemfile
 before_script:
-  - "mysql -e 'create database native_enum_test;' >/dev/null"
   - "cp spec/{.travis.,}database.yml"
-script: bundle exec rake spec:rails_all
+  - "bundle exec rake db:prepare"
+script: bundle exec rake spec
 sudo: false

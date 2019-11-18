@@ -41,9 +41,9 @@ That's it!
 
 It currently works with:
 
- * ActiveRecord 3.x and 4.0, 4.1, and 4.2.
+ * ActiveRecord 4.0, 4.1, 4.2, 5.0, and 5.1.
  * The `mysql2` and `sqlite` adapters.
- * Ruby 1.9.3, 2.0.x, 2.1.x, and 2.2.x.
+ * Ruby 2.0 and above.
 
 If you'd like to support other adapters, pull requests are welcome!
 
@@ -79,14 +79,14 @@ Pull requests welcome! Join
 
 ### Running the tests ###
 
-To run the tests for all supported database adapters:
-
-    rake spec:all
-
 To run the tests for all adapters and all versions of ActiveRecord:
 
-    rake spec:rails_all
+    appraisal rake spec:all
 
-To run the tests for just one adapter:
+To run the tests for a specific adapter:
 
     DB=mysql rake spec
+
+To run the tests for a specific version of ActiveRecord:
+
+    appraisal activerecord-5.2 rake spec:all

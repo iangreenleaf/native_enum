@@ -1,7 +1,7 @@
 mysql:
   adapter: mysql2
   database: native_enum_test
-  username:
+  username: root
   supports_enums: true
 sqlite:
   adapter: sqlite3

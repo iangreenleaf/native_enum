@@ -3,7 +3,7 @@ module ActiveRecord
     if defined?(AbstractMysqlAdapter)
       class AbstractMysqlAdapter
         protected
-        def initialize_type_map_with_enum(m)
+        def initialize_type_map_with_enum(m = type_map)
           initialize_without_enum(m)
           register_enum_type(m, %r(^enum)i)
           register_set_type(m, %r(^set)i)
@@ -55,9 +55,14 @@ module ActiveRecord
         @limit = options[:limit]
       end
 
-      def type_cast_from_database(value)
+      # Deserialize value from the database
+      #
+      # See: https://github.com/rails/rails/blob/v5.0.7/activemodel/lib/active_model/type/value.rb#L15-L23
+      def deserialize(value)
         value.split(",")
       end
+      # deserialize used to be called type_cast_from_database before v5
+      alias_method :type_cast_from_database, :deserialize
     end
   end
 end
