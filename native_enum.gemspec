@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.add_dependency "activerecord", ">= 3.0"
   s.add_development_dependency "rake"
   s.add_development_dependency "bundler"
-  s.add_development_dependency "mysql2", "~> 0.3.11"
+  s.add_development_dependency "mysql2", ">= 0.3.11", "< 0.5"
   s.add_development_dependency "sqlite3", "~>1.3.4"
   s.add_development_dependency "rspec", "~> 3.1"
   s.add_development_dependency "appraisal"
