@@ -2,7 +2,7 @@
 
 Provides ActiveRecord (and thus Rails) support for the nonstandard `ENUM` and `SET` data types.
 
-[![Build Status](https://travis-ci.org/iangreenleaf/native_enum.png?branch=master)](http://travis-ci.org/iangreenleaf/native_enum)
+[![Build Status](https://travis-ci.org/iangreenleaf/native_enum.svg?branch=master)](https://travis-ci.org/iangreenleaf/native_enum)
 
 ## How now? ##
 
