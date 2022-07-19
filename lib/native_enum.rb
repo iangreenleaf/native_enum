@@ -7,8 +7,10 @@ require 'connection_adapters/mysql2' if defined?( Mysql2 )
 
 if ActiveRecord::VERSION::MAJOR < 4 || (ActiveRecord::VERSION::MAJOR == 4 && ActiveRecord::VERSION::MINOR <= 1)
   require 'native_enum/activerecord_enum_pre42.rb'
-else
+elsif ActiveRecord::VERSION::MAJOR < 7
   require 'native_enum/activerecord_enum_post42.rb'
+else
+  require 'native_enum/activerecord_enum_post7.rb'
 end
 
 module ActiveRecord
