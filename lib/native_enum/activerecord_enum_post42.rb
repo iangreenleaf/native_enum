@@ -63,6 +63,18 @@ module ActiveRecord
       end
       # deserialize used to be called type_cast_from_database before v5
       alias_method :type_cast_from_database, :deserialize
+
+      def cast(value)
+        if value&.is_a?(Array)
+          value.join ','
+        else
+          value
+        end
+      end
+
+      def type_cast_for_schema(value)
+        %Q["#{value.join(',')}"]
+      end
     end
   end
 end

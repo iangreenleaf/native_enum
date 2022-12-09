@@ -11,7 +11,7 @@ RSpec.describe "SET datatype" do
     end
 
     it "dumps default option" do
-      expect(subject).to match %r{t\.set\s+"gadgets",.+(:default =>|default:) \["propeller", "gps"\]}
+      expect(subject).to match %r{t\.set\s+"gadgets",.+(:default =>|default:) "propeller,gps"}
     end
 
     it "dumps null option" do
