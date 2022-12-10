@@ -28,7 +28,7 @@ module ActiveRecord
 
       def extract_default_with_enum default
         if type == :set
-          default.split "," if default.present?
+          default
         else
           extract_default default
         end
