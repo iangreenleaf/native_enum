@@ -16,7 +16,7 @@ module ActiveRecord
 
 
 
-      if ActiveRecord::VERSION::MAJOR >= 5 && ActiveRecord::VERSION::MINOR >= 1
+      if ActiveRecord::VERSION::MAJOR > 5 || (ActiveRecord::VERSION::MAJOR == 5 && ActiveRecord::VERSION::MINOR >= 1)
         def type_to_sql_with_enum(type, limit: nil, **args)
           if type.to_s == "enum" || type.to_s == "set"
             list = limit
