@@ -1,8 +1,8 @@
+***This gem has been retired and is no longer actively maintained. It retains partial functionality on Rails 6, but will not be receiving future updates.***
+
 # Native ENUM types in ActiveRecord #
 
 Provides ActiveRecord (and thus Rails) support for the nonstandard `ENUM` and `SET` data types.
-
-[![Build Status](https://travis-ci.org/iangreenleaf/native_enum.svg?branch=master)](https://travis-ci.org/iangreenleaf/native_enum)
 
 ## How now? ##
 
